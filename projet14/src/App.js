@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+// AppRouter.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ErrorPage from './pages/ErrorPage'; // Assure-toi d'importer la bonne page d'erreur
 import './App.css';
-
-function App() {
+import Layout from './components/Layout';
+import EmployeeListPage from './pages/EmployeeListPage';
+const AppRouter = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/EmployeeListPage" element={<EmployeeListPage />} />
+        </Route>
+        
+        {/* Page d'erreur pour les URL non trouvées */}
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
-export default App;
+export default AppRouter;
