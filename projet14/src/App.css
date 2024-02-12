@@ -125,3 +125,26 @@ button {
 .modal.active {
   display: block;
 }
+
+/* App.css */
+.employee-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.pagination {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.error{
+  color: red;
+}
