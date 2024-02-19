@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addEmployee } from '../redux/employeeSlice';
 
-import Modal from '../components/Modal';
+import Modal  from 'react-customise-modal-bis';
+//import Modal from '../components/ModalBis';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const Home = ({ addEmployee }) => {
   const [state, setState] = useState({
@@ -90,7 +95,7 @@ const Home = ({ addEmployee }) => {
     errors: {},
     isModalOpen: false,
   });
-
+  const navigate = useNavigate();
   //const navigate = useNavigate();
 
   const saveEmployee = () => {
@@ -108,7 +113,7 @@ const Home = ({ addEmployee }) => {
       });
 
       console.log('Employee Saved!');
-
+      console.log("ici", state);
       setState({ ...state, isModalOpen: true });
     }
   };
@@ -193,24 +198,26 @@ const Home = ({ addEmployee }) => {
 
   const closeModal = () => {
     setState({ ...state, isModalOpen: false });
-   
-  };
-  
 
+  };
+  const handleOkButtonClick = () => {
+    // Fermer la modal
+    // closeModal();
+    console.log("bien ");
+    // Rediriger vers la page EmployeList
+    // navigate('/EmployeeListPage');
+  };
+  const handleOk = () => {
+    // Logique à exécuter lors de l'appui sur le bouton OK de la modale
+    console.log("OK button clicked");
+    // Redirection vers la page employe
+    navigate('/EmployeeListPage');
+  };
   const customModalButtons = [
-    // {
-    //   label: 'Cancel',
-    //  color: 'red',
-    //   action: () => closeModal(),
-    //  },
     {
       label: 'OK',
-       color: 'green',
-      action: () => {
-        closeModal();
-      },
+      action: handleOkButtonClick,
     },
-
   ];
 
   return (
@@ -335,17 +342,23 @@ const Home = ({ addEmployee }) => {
 
         <button onClick={saveEmployee}>Save</button>
 
-      {/*  <Modal
-          isOpen={state.isModalOpen}
-          message="Employee Created!"
-          buttons={customModalButtons}
-          onClose={closeModal} // Fournir la fonction onClose
-          color="blue"
-          background="white"
-          /> */}
+
+        {/*   <Modal 
+        isOpen={state.isModalOpen} 
+        onClose={closeModal} 
+        message="Employee Created!" 
+        buttons={customModalButtons} 
+        onOk={handleOk} 
+        color="black" 
+        background="white" 
+      />   */}
         <Modal
-        isOpen={state.isModalOpen}  />
-    
+          isOpen={state.isModalOpen} 
+          onClose={closeModal} 
+          onOk={handleOk} 
+          />
+
+
       </div>
     </div>
   );
